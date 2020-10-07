@@ -20,12 +20,7 @@ public class NotesServiceImpl implements NotesService {
     private EntityManager entityManager;
 
     @Override
-    public Note createNote(Note note) {
-        return notesRepository.save(note);
-    }
-
-    @Override
-    public Note updateNote(Note note) {
+    public Note saveNode(Note note) {
         return notesRepository.save(note);
     }
 

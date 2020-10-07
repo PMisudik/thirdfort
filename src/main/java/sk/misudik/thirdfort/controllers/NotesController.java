@@ -17,13 +17,13 @@ public class NotesController {
     @PostMapping("/notes")
     @ApiOperation(value = "Creates a new note")
     public ResponseEntity<?> createNote(@RequestBody Note note) {
-        return ResponseEntity.ok(notesService.createNote(note));
+        return ResponseEntity.ok(notesService.saveNode(note));
     }
 
     @PutMapping("/notes/{id}")
     @ApiOperation(value = "Updates existing note")
     public ResponseEntity<?> updateNote(@RequestBody Note note) {
-        return ResponseEntity.ok(notesService.updateNote(note));
+        return ResponseEntity.ok(notesService.saveNode(note));
     }
 
     @PutMapping("/notes/archive/{id}")

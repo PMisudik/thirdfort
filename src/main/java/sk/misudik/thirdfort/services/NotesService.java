@@ -5,9 +5,7 @@ import sk.misudik.thirdfort.entities.Note;
 import java.util.List;
 
 public interface NotesService {
-    Note createNote(Note note);
-
-    Note updateNote(Note note);
+    Note saveNode(Note note);
 
     Note archiveNote(long id);
 
