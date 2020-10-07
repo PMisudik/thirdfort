@@ -4,71 +4,73 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import sk.misudik.thirdfort.entities.Note;
 import sk.misudik.thirdfort.repositories.NotesRepository;
+import sk.misudik.thirdfort.services.NotesService;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 class NotesControllerTest {
 
 	@Autowired
-	private NotesRepository notesRepository;
+	private NotesService notesService;
 
     void contextLoads() {
     }
 
     @Test
 	public void createNote()  {
-		assertNotNull(notesRepository.createNote(new Note("test")));
+		assertNotNull(notesService.createNote(new Note("test")));
 	}
 
 	@Test
 	public void updateNote() {
-		var note = notesRepository.createNote(new Note("test"));
+		var note = notesService.createNote(new Note("test"));
 		note.setText("test updated");
-		var newNote = notesRepository.updateNote(note, note.getId());
+		var newNote = notesService.updateNote(note, note.getId());
 		assertEquals(newNote.getText(), "test updated");
 	}
 
 	@Test
 	public void archiveNote() {
-		var note = notesRepository.createNote(new Note("test"));
+		var note = notesService.createNote(new Note("test"));
 		note.setArchived(true);
-		var newNote = notesRepository.updateNote(note, note.getId());
+		var newNote = notesService.updateNote(note, note.getId());
 		assertTrue(newNote.isArchived());
 	}
 
 	@Test
 	public void unarchiveNote() {
-		var note = notesRepository.createNote(new Note("test"));
+		var note = notesService.createNote(new Note("test"));
 		note.setArchived(false);
-		var newNote = notesRepository.updateNote(note, note.getId());
+		var newNote = notesService.updateNote(note, note.getId());
 		assertTrue(newNote.isArchived());
 	}
 
 	@Test
 	public void deleteNote() {
-		var note = notesRepository.createNote(new Note("test"));
-		assertNotNull(notesRepository.deleteNote(note.getId()));
+		var note = notesService.createNote(new Note("test"));
+		assertNotNull(notesService.deleteNote(note.getId()));
 	}
 
 	@Test
 	public void getArchived() {
-		notesRepository.createNote(new Note("test1", true));
-		notesRepository.createNote(new Note("test2", true));
-		notesRepository.createNote(new Note("test3", false));
-		assertEquals(notesRepository.getArchived().size(), 2);
+		notesService.createNote(new Note("test1", true));
+		notesService.createNote(new Note("test2", true));
+		notesService.createNote(new Note("test3", false));
+		assertEquals(notesService.getArchived().size(), 2);
 	}
 
 	@Test
 	public void getUnarchived() {
-		notesRepository.createNote(new Note("test1", true));
-		notesRepository.createNote(new Note("test2", true));
-		notesRepository.createNote(new Note("test3", false));
-		assertEquals(notesRepository.getUnarchived().size(), 1);
+		notesService.createNote(new Note("test1", true));
+		notesService.createNote(new Note("test2", true));
+		notesService.createNote(new Note("test3", false));
+		assertEquals(notesService.getUnarchived().size(), 1);
 	}
 
 }
