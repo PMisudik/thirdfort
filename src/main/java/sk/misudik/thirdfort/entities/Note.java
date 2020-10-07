@@ -15,6 +15,9 @@ public class Note {
 
     private boolean isArchived;
 
+    public Note() {
+    }
+
     public Note(String text) {
         this.text = text;
     }

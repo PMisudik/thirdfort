@@ -19,23 +19,24 @@ public class NotesController {
     }
 
     @PutMapping("/notes/{id}")
-    public ResponseEntity<?> updateNote(@RequestBody Note note, @PathVariable long id) {
-        return ResponseEntity.ok(notesService.updateNote(note, id));
+    public ResponseEntity<?> updateNote(@RequestBody Note note) {
+        return ResponseEntity.ok(notesService.updateNote(note));
     }
 
     @PutMapping("/notes/archive/{id}")
-    public ResponseEntity<?> archiveNote(@RequestBody Note note, @PathVariable long id) {
-        return ResponseEntity.ok(notesService.archiveNote(note, id));
+    public ResponseEntity<?> archiveNote(@PathVariable long id) {
+        return ResponseEntity.ok(notesService.archiveNote(id));
     }
 
     @PutMapping("/notes/unarchive/{id}")
-    public ResponseEntity<?> unarchiveNote(@RequestBody Note note, @PathVariable long id) {
-        return ResponseEntity.ok(notesService.unarchiveNote(note, id));
+    public ResponseEntity<?> unarchiveNote(@PathVariable long id) {
+        return ResponseEntity.ok(notesService.unarchiveNote(id));
     }
 
     @DeleteMapping("/notes/{id}")
     public ResponseEntity<?> deleteNote(@PathVariable long id) {
-        return ResponseEntity.ok(notesService.deleteNote(id));
+        notesService.deleteNote(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/notes/archived")

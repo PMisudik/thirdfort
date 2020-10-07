@@ -5,17 +5,20 @@ import sk.misudik.thirdfort.entities.Note;
 import java.util.List;
 
 public interface NotesService {
-    abstract Note createNote(Note note);
+    Note createNote(Note note);
 
-    abstract Note updateNote(Note note, long id);
+    Note updateNote(Note note);
 
-    abstract Note archiveNote(Note note, long id);
+    Note archiveNote(long id);
 
-    abstract Note unarchiveNote(Note note, long id);
+    Note unarchiveNote(long id);
 
-    abstract Note deleteNote(long id);
+    void deleteNote(long id);
 
-    abstract List<Note> getArchived();
+    List<Note> getArchived();
 
-    abstract List<Note> getUnarchived();
+    List<Note> getUnarchived();
+
+    Note find(long id);
+
 }
